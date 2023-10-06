@@ -218,6 +218,8 @@ function searchInFile(filePath)
 {
   try {
 
+    console.log("In file: " + filePath)
+
     var regex = "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
 
     const fileContent = fs.readFileSync(filePath, 'utf8')
@@ -235,6 +237,8 @@ function searchInFile(filePath)
 function searchInDirectory(directoryPath)
 {
   try {
+    console.log("In directory: " + directoryPath)
+
     const files = fs.readdirSync(directoryPath);
     files.forEach((file) => {
       const filePath = path.join(directoryPath, file);
