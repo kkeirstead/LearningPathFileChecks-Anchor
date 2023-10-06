@@ -188,6 +188,24 @@ const main = async () => {
     const learningPathDirectory = core.getInput('learningPathsDirectory', { required: true });
     
     searchInDirectory(headPathPrefix)
+    searchInDirectory(mergePathPrefix)
+
+    console.log("HEAD: ")
+    for (const key in headGuidToFileAndLine) {
+      if (headGuidToFileAndLine.hasOwnProperty(key)) {
+        const value = headGuidToFileAndLine[key];
+        console.log(key + " -> " + value)
+      }
+    }
+
+    console.log("")
+    console.log("MERGE: ")
+    for (const key in mergeGuidToFileAndLine) {
+      if (mergeGuidToFileAndLine.hasOwnProperty(key)) {
+        const value = mergeGuidToFileAndLine[key];
+        console.log(key + " -> " + value)
+      }
+    }
 
     /*
     // Scan each file in the learningPaths directory
@@ -214,11 +232,14 @@ const main = async () => {
   }
 }
 
-function searchInFile(filePath)
+var headGuidToFileAndLine = {};
+var mergeGuidToFileAndLine = {};
+
+function searchInFile(filePath, isMerge)
 {
   try {
 
-    console.log("In file: " + filePath)
+    //console.log("In file: " + filePath)
 
     //var regex = "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
 
@@ -227,8 +248,20 @@ function searchInFile(filePath)
 
     if (regexIndex !== -1)
     {
+      let lineNumber = fileContent.substring(0, regexIndex).split("\n").length
       console.log("Found GUID in file: " + filePath + " at index: " + regexIndex)
-      console.log("GUID: " + fileContent.substring(regexIndex + 5, regexIndex + 21))
+      guid = fileContent.substring(regexIndex + 5, regexIndex + 36 + 5)
+      console.log("GUID: " + guid)
+      console.log("Line Number: " + lineNumber)
+
+      if (!isMerge) {
+        headGuidToFileAndLine[guid] = [filePath, lineNumber] // should also probably ensure there's no duplicates
+      }
+      else {
+        mergeGuidToFileAndLine[guid] = [filePath, lineNumber] // should also probably ensure there's no duplicates
+      }
+
+
     }
   } catch (err) {
     console.log(err);
