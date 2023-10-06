@@ -271,8 +271,6 @@ function searchInFile(filePath, isMerge)
 function searchInDirectory(directoryPath, isMerge)
 {
   try {
-    console.log("In directory: " + directoryPath)
-
     const files = fs.readdirSync(directoryPath);
     files.forEach((file) => {
       const filePath = path.join(directoryPath, file);
