@@ -220,19 +220,15 @@ function searchInFile(filePath)
 
     console.log("In file: " + filePath)
 
-    var regex = "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+    //var regex = "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
 
     const fileContent = fs.readFileSync(filePath, 'utf8')
-    const regexIndex = fileContent.search(regex)
-
-    if (filePath === "head/src/Microsoft.Diagnostics.Monitoring.WebApi/CollectionRulePipelineState.cs")
-    {
-      console.log(fileContent)
-    }
+    const regexIndex = fileContent.indexOf("# LP ")
 
     if (regexIndex !== -1)
     {
       console.log("Found GUID in file: " + filePath + " at index: " + regexIndex)
+      console.log("GUID: " + fileContent.substring(regexIndex + 5, regexIndex + 21))
     }
   } catch (err) {
     console.log(err);
