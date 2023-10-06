@@ -187,8 +187,8 @@ const main = async () => {
   try {
     const learningPathDirectory = core.getInput('learningPathsDirectory', { required: true });
     
-    searchInDirectory(headPathPrefix)
-    searchInDirectory(mergePathPrefix)
+    searchInDirectory(headPathPrefix, false)
+    searchInDirectory(mergePathPrefix, true)
 
     console.log("HEAD: ")
     for (const key in headGuidToFileAndLine) {
@@ -268,7 +268,7 @@ function searchInFile(filePath, isMerge)
   }
 }
 
-function searchInDirectory(directoryPath)
+function searchInDirectory(directoryPath, isMerge)
 {
   try {
     console.log("In directory: " + directoryPath)
@@ -279,9 +279,9 @@ function searchInDirectory(directoryPath)
       const stat = fs.statSync(filePath);
 
       if (stat.isDirectory()) {
-        searchInDirectory(filePath);
+        searchInDirectory(filePath, isMerge);
       } else if (stat.isFile()) {
-        searchInFile(filePath);
+        searchInFile(filePath, isMerge);
       }
     })
   } catch (err) {
