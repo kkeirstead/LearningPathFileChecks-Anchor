@@ -1,4 +1,4 @@
-name: 'CheckLearningPathLinks Action'
+name: 'CheckLearningPathLinks-Anchor Action'
 description: 'Checks the links in the learning paths for staleness'
 inputs:
   learningPathsDirectory:

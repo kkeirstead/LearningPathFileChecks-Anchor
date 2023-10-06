@@ -7,7 +7,6 @@ const fs = require('fs');
 const mergePathPrefix = "merge/";
 const headPathPrefix = "head/";
 const linePrefix = "#L";
-const sourceDirectoryName = core.getInput('sourceDirectoryName', { required: true });
 
 modifiedFilesDict = {};
 modifiedFilesUrlToFileName = {};
