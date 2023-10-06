@@ -1,0 +1,9 @@
+name: 'CheckLearningPathLinks Action'
+description: 'Checks the links in the learning paths for staleness'
+inputs:
+  learningPathsDirectory:
+    description: 'The directory where the learning paths reside (e.g. documentation/learningPath)'
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
