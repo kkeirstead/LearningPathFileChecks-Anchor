@@ -225,6 +225,11 @@ function searchInFile(filePath)
     const fileContent = fs.readFileSync(filePath, 'utf8')
     const regexIndex = fileContent.search(regex)
 
+    if (filePath === "head/src/Microsoft.Diagnostics.Monitoring.WebApi/CollectionRulePipelineState.cs")
+    {
+      console.log(fileContent)
+    }
+
     if (regexIndex !== -1)
     {
       console.log("Found GUID in file: " + filePath + " at index: " + regexIndex)
