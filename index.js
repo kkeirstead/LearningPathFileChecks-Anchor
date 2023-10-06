@@ -4,6 +4,7 @@
 
 const core = require('@actions/core');
 const fs = require('fs');
+const path = require('path');
 const mergePathPrefix = "merge/";
 const headPathPrefix = "head/";
 const linePrefix = "#L";
